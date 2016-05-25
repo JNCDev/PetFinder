@@ -5,7 +5,6 @@
 // User will also be given refine options to refine by animal type & ...
 
 
-
 var app = {};
 
 app.getData = function() {
