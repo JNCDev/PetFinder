@@ -13,10 +13,20 @@ var userLocation = {};
 
 petApp.init = function() {
 	// petApp.getLocationData();
+	petApp.getUserLocation();
+	
 
-	userLocation = $('#userPostalCode').val();
-	petApp.getLocationData(userLocation);
+	// petApp.getLocationData(userLocation);
 	// console.log(userLocation);
+}
+petApp.getUserLocation = function() {
+	$('#userLocationInput').on('submit', function(e) {
+		e.preventDefault();
+		var userLocation = $('#userPostalCode').val();
+		document.getElementById('userLocationInput').reset()
+		console.log(userLocation);
+		petApp.getLocationData(userLocation)
+	})
 }
 
 petApp.getLocationData = function(postalCode) {
@@ -49,14 +59,12 @@ petFind.getData = function() {
 			format:'json',
 			}
 	}).then(function(petResults){
-			console.log(petResults.petfinder.pets);
+			// console.log(petResults.petfinder.pets);
 		});
 	};
 
 $(function(){
-	app.getData();
-	petFind.getData();
-
+	petApp.init();
 });
 
 
