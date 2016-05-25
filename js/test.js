@@ -1,6 +1,6 @@
 // Step 1: User enters their postal code
 // Step 2: Based on user's postal code, API returns all the shelters in the user's vicinity (back end)
-// Step 3: User chooses whether they want to see 'small and furry animals' or 'reptiles'
+// Step 3: User chooses whether they want to see 'small and furry animals', 'birds', 'rabbits', 'scales, fins & other'
 // Step 4: Display all animals available at the shelters in the user's vicinity that match their animal filter
 // Step 5: User has the option to advance filter animals by breed
 // Step 6: Display all animals (Image, Name, Breed, Gender, Age, Shelter, Location) that match their criteria
