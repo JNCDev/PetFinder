@@ -1,3 +1,9 @@
+// User enters postal code
+// Based on their postal code, API returns the closest 5 shelters in the user's area
+// Then based on those 5 shelters, user sees all the specified types 
+// of animals available for adoption at those shelters 
+// User will also be given refine options to refine by animal type & ...
+
 var app = {};
 
 app.getData = function() {
