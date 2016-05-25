@@ -32,12 +32,28 @@ petApp.getLocationData = function(postalCode) {
 		});
 	};
 
-// petApp.getPetsByLocation = function() {
 
-// };
+var petFind = {};
+
+petFind.getData = function() {
+	$.ajax({
+		url: 'http://api.petfinder.com/shelter.getPets',
+		type: 'GET',
+		dataType: 'jsonp',
+		data: {
+			key: '7650ccca5ad807a0a39eaf4aed5ccb10',
+			id: 'ON57',
+			format:'json',
+			}
+	}).then(function(petResults){
+			console.log(petResults.petfinder.pets);
+		});
+	};
 
 $(function(){
-	petApp.init();
+	app.getData();
+	petFind.getData();
+
 });
 
 
