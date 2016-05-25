@@ -4,17 +4,16 @@
 // of animals available for adoption at those shelters 
 // User will also be given refine options to refine by animal type & ...
 
+var petApp = {};
 
-var app = {};
-
-var location = {};
+var userLocation = {};
 
 petApp.init = function() {
-	petApp.getLocationData();
+	// petApp.getLocationData();
 
-	var location = $('#userPostalCode').val(results);
-	petApp.getLocationData(postalCode);
-	console.log(results);
+	userLocation = $('#userPostalCode').val();
+	petApp.getLocationData(userLocation);
+	// console.log(userLocation);
 }
 
 petApp.getLocationData = function(postalCode) {
