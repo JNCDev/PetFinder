@@ -1,8 +1,11 @@
-// User enters postal code
-// Based on their postal code, API returns the closest 5 shelters in the user's area
-// Then based on those 5 shelters, user sees all the specified types 
-// of animals available for adoption at those shelters 
-// User will also be given refine options to refine by animal type & ...
+// Step 1: User enters their postal code
+// Step 2: Based on user's postal code, API returns all the shelters in the user's vicinity (back end)
+// Step 3: User chooses whether they want to see 'small and furry animals' or 'reptiles'
+// Step 4: Display all animals available at the shelters in the user's vicinity that match their animal filter
+// Step 5: User has the option to advance filter animals by breed
+// Step 6: Display all animals (Image, Name, Breed, Gender, Age, Shelter, Location) that match their criteria
+// Step 7: If user is interested in a specific animal, they can click on the animal
+// and it will link to the shelter 
 
 var petApp = {};
 
