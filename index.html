@@ -3,19 +3,67 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	
+	<!-- OUR TEMPLATES -->
+	
+	<script id="petTemplate" type="x-handlebars-template">
+		<div>
+           <figure>
+               <img src="{{#if photo}}{{photo}}{{/if}}">
+           </figure>
+           <div>
+               <h4>Meet {{name}}!</h4>
+               <ul>
+                   <li>Breed: {{breed}}</li>
+                   <li>Sex: {{sex}}</li>
+                   <li>Age: {{age}}</li>
+                   <li>City: {{city}}</li>
+               </ul>
+               <ul>
+               <p>
+                   Interested in adopting {{name}}? <a href="{{shelter}}" target="_blank">Click Here</a>
+               </p>    
+           </div>
+       </div>
+	</script>
+
+	<!-- END TEMPLATES -->
+
+
 </head>
 <body>
-	<form action="" id="userLocationInput">
-		<input type="text" placeholder="Please enter your Postal Code" id="userPostalCode">
-		<input type="submit" id="postalSubmit">
-	</form>
-	<form action="">
-		<input type="radio" name="animalSelect" value="Rabbit">
-		<input type="radio" name="animalSelect" value="Small & Furry">
-		<input type="radio" name="animalSelect" value="Scales, Fins & Other">
-		<input type="radio" name="animalSelect" value="Bird">
-	</form>
+	<header>
+		<div>
+			<h1>Company Name</h1>
+			<figure></figure>
+		</div>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid dolores saepe, commodi, natus eaque ipsam debitis repellat obcaecati ut rem suscipit minima vero praesentium quod veniam culpa ab repellendus! Quidem!</p>
+		<form action="" id="userLocationInput">
+			<input type="text" placeholder="Please enter your Postal Code" id="userPostalCode">
+			<input type="submit" id="postalSubmit">
+		</form>
+	</header>
+
+	<section>
+		<h2>What are you looking for?</h2>
+		<form action="">
+			<input type="radio" id="Rabbit" name="animalSelect" value="Rabbit">
+			<label for="Rabbit">Rabbit</label>
+			<input type="radio" id="smallfurry" name="animalSelect" value="Small & Furry">
+			<label for="smallfurry">Small & Furry</label>
+			<input type="radio" id="scales" name="animalSelect" value="Scales, Fins & Other">
+			<label for="scales">Scales, Fins & Other</label>
+			<input type="radio" id="birds" name="animalSelect" value="Bird">
+			<label for="birds">Birds</label>
+		</form>
+	</section>
+
+	<section>
+		<div class="results"></div>
+	</section>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js'></script>
 	<script src="js/main.js"></script>
 	
 </body>
