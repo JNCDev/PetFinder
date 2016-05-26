@@ -90,15 +90,17 @@ petApp.getData = function (shelterIDs) {
 };
 
 petApp.displayPets = function() {
-	//Work with pet data
-	var filteredPets = petApp.pets.filter(function(value){
-		// console.log(value)
-               return value.animal.$t === $('input[name=animalSelect]:checked').val();
-     });
+
+	$('input[name=animalSelect]').on('click',function (res){
+		//Work with pet data
+		var filteredPets = petApp.pets.filter(function(value){
+			if (value != undefined) {
+			// console.log(value)
+	            return value.animal.$t === $('input[name=animalSelect]:checked').val();
+	        }	
+		});
 	console.log(filteredPets);
-
-	// console.log();
-
+     });
 };
 
 $(function () {
