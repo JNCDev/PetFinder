@@ -16,6 +16,7 @@ var userLocation = {};
 petApp.init = function () {
 	// petApp.getLocationData();
 	petApp.getUserLocation();
+	// petApp.getData();
 
 	// petApp.getLocationData(userLocation);
 	// console.log(userLocation);
@@ -42,25 +43,62 @@ petApp.getLocationData = function (postalCode) {
 			count: 10 // This will help limit the number of shelters. The first object returned is closest location
 		}
 	}).then(function (results) {
-		console.log(results.petfinder.shelters.shelter);
+		var shelterResults = results.petfinder.shelters.shelter
+		var shelterIDs = shelterResults.map(function (a){
+			return a.id["$t"]
+		})
+		console.log(shelterIDs);
+		petApp.getData(shelterIDs);
 	});
 };
 
-var petFind = {};
+// var petFind = {};
 
-petFind.getData = function () {
-	$.ajax({
-		url: 'http://api.petfinder.com/shelter.getPets',
-		type: 'GET',
-		dataType: 'jsonp',
-		data: {
-			key: '7650ccca5ad807a0a39eaf4aed5ccb10',
-			id: 'ON57',
-			format: 'json'
-		}
-	}).then(function (petResults) {
-		// console.log(petResults.petfinder.pets);
+petApp.getData = function (shelterIDs) {
+	console.log(shelterIDs)
+
+	var shelterCalls = shelterIDs.map(function(id) {
+		return $.ajax({
+			url: 'http://api.petfinder.com/shelter.getPets',
+			type: 'GET',
+			dataType: 'jsonp',
+			data: {
+				key: '7650ccca5ad807a0a39eaf4aed5ccb10',
+				id: id, 
+				format: 'json'
+			}
+		});
 	});
+
+	$.when.apply(null, shelterCalls)
+		.then(function() {
+			var data = Array.prototype.slice.call(arguments);
+
+			data = data.map(function(pets) {
+				return pets[0].petfinder.pets.pet;
+			});
+			//Here is your pets
+			//Flatten array of pets
+			data = data.reduce(function(prev,next) {
+				return prev.concat(next);
+			},[]);
+
+			console.log(data);
+			petApp.pets = data;
+			petApp.displayPets();
+		});
+};
+
+petApp.displayPets = function() {
+	//Work with pet data
+	var filteredPets = petApp.pets.filter(function(value){
+		// console.log(value)
+               return value.animal.$t === $('input[name=animalSelect]:checked').val();
+     });
+	console.log(filteredPets);
+
+	// console.log();
+
 };
 
 $(function () {
