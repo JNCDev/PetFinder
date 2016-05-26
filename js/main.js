@@ -28,6 +28,9 @@ petApp.getUserLocation = function () {
 		document.getElementById('userLocationInput').reset();
 		console.log(userLocation);
 		petApp.getLocationData(userLocation);
+		if (userLocation === undefined) {
+			alert('Sorry! No animals found in your area')
+		}
 	});
 };
 
@@ -40,7 +43,7 @@ petApp.getLocationData = function (postalCode) {
 			key: '7650ccca5ad807a0a39eaf4aed5ccb10',
 			location: postalCode,
 			format: 'json',
-			count: 10 // This will help limit the number of shelters. The first object returned is closest location
+			// count: 10 // This will help limit the number of shelters. The first object returned is closest location
 		}
 	}).then(function (results) {
 		var shelterResults = results.petfinder.shelters.shelter
@@ -90,17 +93,39 @@ petApp.getData = function (shelterIDs) {
 };
 
 petApp.displayPets = function() {
-
+	// $('#userPostalCode')
 	$('input[name=animalSelect]').on('click',function (res){
+		$('.results').empty();
 		//Work with pet data
 		var filteredPets = petApp.pets.filter(function(value){
 			if (value != undefined) {
 			// console.log(value)
 	            return value.animal.$t === $('input[name=animalSelect]:checked').val();
-	        }	
+	        }
 		});
-	console.log(filteredPets);
-     });
+		// console.log(filteredPets);
+
+		const petTemplate = $('#petTemplate').html();
+		const template = Handlebars.compile(petTemplate);
+		filteredPets.forEach(function(pet){
+
+		const petInfo = {
+			name: pet.name.$t,
+			age: pet.age.$t,
+			sex: pet.sex.$t,
+			breed: pet.breeds.breed.$t,
+			description: pet.description.$t,
+			photo: pet.media.photos.photo[2].$t,
+			shelter: 'https://www.petfinder.com/petdetail/' + pet.id.$t,
+			address: pet.contact.address1.$t,
+			city: pet.contact.city.$t
+		}
+		const fillTemplate = template(petInfo);
+
+		$(".results").append(fillTemplate);
+		});
+	 });
+
 };
 
 $(function () {
