@@ -16,9 +16,9 @@ var userLocation = {};
 petApp.init = function () {
 	// petApp.getLocationData();
 	petApp.getUserLocation();
-	$('#postalSubmit').on('click', function(){
+	$('#postalSubmit').on('click', function () {
 		$('.results').empty();
-		$('input[name=animalSelect]').attr('checked',false);
+		$('input[name=animalSelect]').attr('checked', false);
 	});
 	// petApp.getData();
 
@@ -44,16 +44,17 @@ petApp.getLocationData = function (data) {
 		data: {
 			key: '7650ccca5ad807a0a39eaf4aed5ccb10',
 			location: postalCode,
-			format: 'json',
-			// count: 10 // This will help limit the number of shelters. The first object returned is closest location
+			format: 'json'
 		}
-	}).then(function (results) {
+	}). // count: 10 // This will help limit the number of shelters. The first object returned is closest location
+	then(function (results) {
 		console.log(results);
 		if (results.petfinder.shelters != undefined) {
 			var shelterResults = results.petfinder.shelters.shelter;
-			var shelterIDs = shelterResults.map(function(a) {
-				return a.id["$t"]
-		})} else {
+			var shelterIDs = shelterResults.map(function (a) {
+				return a.id["$t"];
+			});
+		} else {
 			alert('Sorry! There were no results found for ' + postalCode + '. Please try again');
 		};
 		console.log(shelterIDs);
@@ -64,51 +65,50 @@ petApp.getLocationData = function (data) {
 // var petFind = {};
 
 petApp.getData = function (shelterIDs) {
-	console.log(shelterIDs)
+	console.log(shelterIDs);
 
-	var shelterCalls = shelterIDs.map(function(id) {
+	var shelterCalls = shelterIDs.map(function (id) {
 		return $.ajax({
 			url: 'http://api.petfinder.com/shelter.getPets',
 			type: 'GET',
 			dataType: 'jsonp',
 			data: {
 				key: '7650ccca5ad807a0a39eaf4aed5ccb10',
-				id: id, 
+				id: id,
 				format: 'json'
 			}
 		});
 	});
 
-	$.when.apply(null, shelterCalls)
-		.then(function() {
-			var data = Array.prototype.slice.call(arguments);
+	$.when.apply(null, shelterCalls).then(function () {
+		var data = Array.prototype.slice.call(arguments);
 
-			data = data.map(function(pets) {
-				return pets[0].petfinder.pets.pet;
-			});
-			//Here is your pets
-			//Flatten array of pets
-			data = data.reduce(function(prev,next) {
-				return prev.concat(next);
-			},[]);
-
-			console.log(data);
-			petApp.pets = data;
-			petApp.displayPets();
+		data = data.map(function (pets) {
+			return pets[0].petfinder.pets.pet;
 		});
+		//Here is your pets
+		//Flatten array of pets
+		data = data.reduce(function (prev, next) {
+			return prev.concat(next);
+		}, []);
+
+		console.log(data);
+		petApp.pets = data;
+		petApp.displayPets();
+	});
 };
 
-petApp.displayPets = function() {
+petApp.displayPets = function () {
 	// $('#userPostalCode')
-	$('input[name=animalSelect]').on('click',function (res){
+	$('input[name=animalSelect]').on('click', function (res) {
 		$('.results').empty();
 		//Work with pet data
-		var filteredPets = petApp.pets.filter(function(value){
+		var filteredPets = petApp.pets.filter(function (value) {
 			if (value != undefined) {
-			// console.log(value)
-			var userInput = $('input[name=animalSelect]:checked').val();
-	            return value.animal.$t === userInput;
-	        }
+				// console.log(value)
+				var userInput = $('input[name=animalSelect]:checked').val();
+				return value.animal.$t === userInput;
+			}
 		});
 		console.log(filteredPets);
 		var animalCategory = $('input[name=animalSelect]:checked').val();
@@ -117,27 +117,26 @@ petApp.displayPets = function() {
 			alert('Sorry, there doesn\'t appear to be any ' + animalCategory + ' in your area.');
 		}
 
-		const petTemplate = $('#petTemplate').html();
-		const template = Handlebars.compile(petTemplate);
-		filteredPets.forEach(function(pet){
+		var petTemplate = $('#petTemplate').html();
+		var template = Handlebars.compile(petTemplate);
+		filteredPets.forEach(function (pet) {
 
-		const petInfo = {
-			name: pet.name.$t,
-			age: pet.age.$t,
-			sex: pet.sex.$t,
-			breed: pet.breeds.breed.$t,
-			description: pet.description.$t,
-			photo: pet.media.photos.photo[2].$t,
-			shelter: 'https://www.petfinder.com/petdetail/' + pet.id.$t,
-			address: pet.contact.address1.$t,
-			city: pet.contact.city.$t
-		}
-		const fillTemplate = template(petInfo);
+			var petInfo = {
+				name: pet.name.$t,
+				age: pet.age.$t,
+				sex: pet.sex.$t,
+				breed: pet.breeds.breed.$t,
+				description: pet.description.$t,
+				photo: pet.media.photos.photo[2].$t,
+				shelter: 'https://www.petfinder.com/petdetail/' + pet.id.$t,
+				address: pet.contact.address1.$t,
+				city: pet.contact.city.$t
+			};
+			var fillTemplate = template(petInfo);
 
-		$(".results").append(fillTemplate);
+			$(".results").append(fillTemplate);
 		});
-	 });
-
+	});
 };
 
 $(function () {
