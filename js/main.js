@@ -105,30 +105,36 @@ petApp.displayPets = function () {
 		//Work with pet data
 		var filteredPets = petApp.pets.filter(function (value) {
 			if (value != undefined) {
-				// console.log(value)
-				return value.animal.$t === $('input[name=animalSelect]:checked').val();
-			}
+			// console.log(value)
+			var userInput = $('input[name=animalSelect]:checked').val();
+	            return value.animal.$t === userInput;
+	        }
 		});
 		console.log(filteredPets);
 
-		var petTemplate = $('#petTemplate').html();
-		var template = Handlebars.compile(petTemplate);
-		filteredPets.forEach(function (pet) {
+		if (filteredPets === false) {
+			alert('test');
+		}
 
-			var petInfo = {
-				name: pet.name.$t,
-				age: pet.age.$t,
-				sex: pet.sex.$t,
-				breed: pet.breeds.breed.$t,
-				description: pet.description.$t,
-				photo: pet.media.photos.photo[2].$t,
-				shelter: 'https://www.petfinder.com/petdetail/' + pet.id.$t,
-				address: pet.contact.address1.$t,
-				city: pet.contact.city.$t
-			};
-			var fillTemplate = template(petInfo);
+		const petTemplate = $('#petTemplate').html();
+		const template = Handlebars.compile(petTemplate);
+		filteredPets.forEach(function(pet){
 
-			$(".results").append(fillTemplate);
+		const petInfo = {
+			name: pet.name.$t,
+			age: pet.age.$t,
+			sex: pet.sex.$t,
+			breed: pet.breeds.breed.$t,
+			description: pet.description.$t,
+			photo: pet.media.photos.photo[2].$t,
+			shelter: 'https://www.petfinder.com/petdetail/' + pet.id.$t,
+			address: pet.contact.address1.$t,
+			city: pet.contact.city.$t
+		}
+		const fillTemplate = template(petInfo);
+
+		$(".results").append(fillTemplate);
+
 		});
 	});
 };
