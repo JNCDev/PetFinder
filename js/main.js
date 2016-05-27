@@ -32,13 +32,11 @@ petApp.getUserLocation = function () {
 		document.getElementById('userLocationInput').reset();
 		console.log(userLocation);
 		petApp.getLocationData(userLocation);
-		if (userLocation === undefined) {
-			alert('Sorry! No animals found in your area')
-		}
 	});
 };
 
-petApp.getLocationData = function (postalCode) {
+petApp.getLocationData = function (data) {
+	var postalCode = data;
 	$.ajax({
 		url: 'http://api.petfinder.com/shelter.find',
 		type: 'GET',
@@ -50,10 +48,14 @@ petApp.getLocationData = function (postalCode) {
 			// count: 10 // This will help limit the number of shelters. The first object returned is closest location
 		}
 	}).then(function (results) {
-		var shelterResults = results.petfinder.shelters.shelter
-		var shelterIDs = shelterResults.map(function (a){
-			return a.id["$t"]
-		})
+		console.log(results);
+		if (results.petfinder.shelters != undefined) {
+			var shelterResults = results.petfinder.shelters.shelter;
+			var shelterIDs = shelterResults.map(function(a) {
+				return a.id["$t"]
+		})} else {
+			alert('Sorry! There were no results found for ' + postalCode + '. Please try again');
+		};
 		console.log(shelterIDs);
 		petApp.getData(shelterIDs);
 	});
