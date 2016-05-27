@@ -142,7 +142,8 @@ h6 {
   color: #444; }
 
 h1 {
-  font-size: 4rem; }
+  font-size: 8rem;
+  line-height: 8rem; }
 
 h2 {
   font-size: 1.8rem; }
@@ -173,7 +174,7 @@ input[type=radio] {
 
 section {
   margin: 0;
-  padding: 50px 0; }
+  padding: 100px 0; }
 
 .wrapper {
   width: 80%;
@@ -181,54 +182,65 @@ section {
 
 header {
   margin: 0;
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(../images/stock-photo-close-up-of-a-person-s-hand-holding-a-tortoise-122861651.jpg);
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(rgba(65, 117, 5, 0.5), rgba(65, 117, 5, 0.5)), url("../images/silver_scales/silver_scales.png");
   height: 100vh;
-  text-align: center;
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
   align-items: center; }
-  header .company-logo {
-    position: relative; }
-    header .company-logo::after {
-      position: absolute;
-      display: block;
-      margin: 0;
-      padding: 0;
-      content: "Small & Scaly";
-      font-size: 6rem;
-      font-family: 'Archivo Black', sans-serif;
-      color: #444;
-      left: 10%;
-      right: 10%;
-      top: 20%;
-      z-index: 2; }
-    header .company-logo svg {
-      width: 25%;
-      fill: #CBC57A; }
+  header .wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center; }
+    header .wrapper h1,
+    header .wrapper p {
+      color: white; }
+    header .wrapper .gecko {
+      width: 100%;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      align-items: center; }
+      header .wrapper .gecko svg {
+        width: 25%;
+        fill: #CBC57A; }
+    header .wrapper .company-logo {
+      width: 40%;
+      margin-right: 25px;
+      align-self: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start; }
+      header .wrapper .company-logo h1 {
+        margin: 0; }
+    header .wrapper .intro {
+      width: calc(60% - 25px); }
 
 form#userLocationInput {
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
-  align-items: center; }
+  align-items: flex-start; }
   form#userLocationInput input#userPostalCode {
     outline: none;
     width: 50%;
     height: 50px;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 10px;
     font-size: 1.4rem;
     text-align: center;
-    border: 2px solid #444;
+    background: none;
+    border: 1px solid white;
     transition: all 0.3s; }
     form#userLocationInput input#userPostalCode:focus, form#userLocationInput input#userPostalCode:hover {
-      border-color: #417505; }
+      background: white; }
+      form#userLocationInput input#userPostalCode:focus::-webkit-input-placeholder, form#userLocationInput input#userPostalCode:hover::-webkit-input-placeholder {
+        color: #CBC57A; }
     form#userLocationInput input#userPostalCode:focus {
-      background: #444;
-      color: white; }
+      background: white;
+      color: #CBC57A; }
   form#userLocationInput input[type=submit] {
     outline: none;
     border: none;
@@ -236,12 +248,15 @@ form#userLocationInput {
     background: #417505;
     color: white;
     border-radius: 10px;
-    margin: 25px auto;
+    margin: 25px 0;
     font-size: 1.4rem;
     transition: background, color, 0.3s; }
     form#userLocationInput input[type=submit]:hover {
-      background: #A6C9D2;
-      color: #444; }
+      background: white;
+      color: #417505; }
+
+input[type="text"]::-webkit-input-placeholder {
+  color: white; }
 
 .choose-animal {
   background: #CBC57A;
@@ -259,6 +274,7 @@ label {
   display: block;
   height: auto;
   padding: 50px;
+  border-radius: 10px;
   width: calc(100% / 4 - 25px);
   margin-right: 25px;
   text-align: center;
@@ -269,28 +285,36 @@ label {
   label svg {
     fill: #444; }
 
-.dynamic h2 {
-  text-align: center; }
-
-.dynamic .results {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: center; }
-  .dynamic .results .pet {
-    width: calc(100% / 3 - 15px);
-    margin: 7.5px;
-    padding: 25px; }
-    .dynamic .results .pet p,
-    .dynamic .results .pet a {
-      font-size: 1rem; }
-    .dynamic .results .pet a {
-      text-decoration: none;
-      color: #417505;
-      transition: color 0.3s; }
-      .dynamic .results .pet a:hover {
-        color: #A6C9D2; }
-    .dynamic .results .pet img {
-      height: 200px;
-      overflow: hidden;
-      border-radius: 25px; }
+.dynamic {
+  background: #62a0b0; }
+  .dynamic h2 {
+    text-align: center;
+    color: #c8dee3; }
+  .dynamic .results {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center; }
+    .dynamic .results .pet {
+      width: calc(100% / 3 - 15px);
+      margin: 7.5px;
+      padding: 25px;
+      background: #c8dee3;
+      border: 2px dotted white;
+      border-radius: 10px; }
+      .dynamic .results .pet p,
+      .dynamic .results .pet a {
+        font-size: 1rem; }
+      .dynamic .results .pet a {
+        text-decoration: none;
+        color: #62a0b0;
+        transition: color 0.3s; }
+        .dynamic .results .pet a:hover {
+          color: white; }
+      .dynamic .results .pet .pet-image {
+        text-align: center;
+        margin-bottom: 25px; }
+        .dynamic .results .pet .pet-image img {
+          height: 200px;
+          overflow: hidden;
+          border-radius: 10px; }

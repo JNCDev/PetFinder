@@ -24,7 +24,8 @@ h6 {
 }
 
 h1 {
-	font-size: 4rem;
+	font-size: 8rem;
+	line-height: 8rem;
 }
 
 h2 {
@@ -63,7 +64,7 @@ input[type=radio] {
 
 section {
 	margin:0;
-	padding:50px 0;
+	padding:100px 0;
 }
 
 .wrapper {
@@ -73,69 +74,97 @@ section {
 
 header {
 	margin:0;
-
-	background: linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)),url(../images/stock-photo-close-up-of-a-person-s-hand-holding-a-tortoise-122861651.jpg);
-	background-size: cover;
-	background-position: center;
-
+	background: linear-gradient(rgba(65,117,5,0.5),rgba(65,117,5,0.5)), url('../images/silver_scales/silver_scales.png');
+	
 	height: 100vh;
-	text-align: center;
 
 	display: flex;
 	flex-flow:column wrap;
 	justify-content:center;
-	align-items:center;
+	align-items:center;	
 	
-	.company-logo {
-		position:relative;
-		&::after {
-			position:absolute;
-			display:block;
-			margin:0;
-			padding:0;
-			content:"Small & Scaly";
-			font-size: 6rem;
-			font-family: 'Archivo Black', sans-serif;
-			color:$mainColor;
-			left:10%;
-			right:10%;
-			top:20%;
-			z-index: 2;
-	}
-	
-
-	svg {
-		width:25%;
-		fill:$hazel;
+	.wrapper {
+		h1,
+		p {
+			color:white;
 		}
 
+		display: flex;
+		flex-flow:row wrap;
+		justify-content:flex-start;
+		align-items:center;
+
+		.gecko {
+			width:100%;
+			display: flex;
+			flex-flow:row wrap;
+			justify-content:flex-start;
+			align-items:center;
+
+			svg {
+				width:25%;
+				fill:$hazel;
+				}
+		}	
+		
+		.company-logo {
+			width:40%;
+			margin-right: 25px;
+			align-self:flex-start;
+
+			h1 {
+				margin:0;
+			}
+			
+			display:flex;
+			flex-direction:column;
+			justify-content:flex-start;
+			align-items:flex-start;
+
+		}
+		
+		.intro {
+			width:calc(60% - 25px);
+		}
 	}
+
+	
+
 }
+
 
 form#userLocationInput {
 	display: flex;
 	flex-flow:column wrap;
 	justify-content:center;
-	align-items:center;
+	align-items:flex-start;
 		input#userPostalCode {
 			outline:none;
 			width:50%;
 			height:50px;
 			padding:10px;
-			border-radius: 15px;
+			border-radius: 10px;
 			font-size: 1.4rem;
 			text-align: center;
-			border:2px solid $mainColor;
+			background: none;
+			border:1px solid white;
 			transition:all 0.3s;
+
 			&:focus,
 			&:hover {
-				border-color: $green;
+				background: white;
+				&::-webkit-input-placeholder{
+					color:$hazel;
+				}
+
 			}
 			&:focus {
-				background:$mainColor;
-				color:white;
+				background:white;
+				color:$hazel;
 			}
+
 		}
+
 		input[type=submit] {
 
 			outline:none;
@@ -144,14 +173,18 @@ form#userLocationInput {
 			background: $green;
 			color:white;
 			border-radius: 10px;
-			margin:25px auto;
+			margin:25px 0;
 			font-size: 1.4rem;
 			transition:background, color, 0.3s;
 			&:hover {
-				background:$blue;
-				color:$mainColor;
+				background:white;
+				color:$green;
 			}
 		}
+}
+
+input[type="text"]::-webkit-input-placeholder {
+	color:white;
 }
 
 .choose-animal {
@@ -174,6 +207,7 @@ label {
 
 	height: auto;
 	padding:50px;
+	border-radius: 10px;
 	width:calc(100% / 4 - 25px);
 	margin-right: 25px;
 	text-align: center;
@@ -190,7 +224,10 @@ label {
 .dynamic {
 	h2 {
 		text-align: center;
+		color:lighten($blue,10);
 	}
+
+	background: darken($blue,20);
 
 	.results {
 		display:flex;
@@ -202,6 +239,9 @@ label {
 			width:calc(100% / 3 - 15px);
 			margin:7.5px;
 			padding:25px;
+			background: lighten($blue, 10);
+			border:2px dotted white;
+			border-radius: 10px;
 
 			p,
 			a {
@@ -210,17 +250,22 @@ label {
 
 			a {
 				text-decoration: none;
-				color:$green;
+				color:darken($blue,20);
 				transition:color 0.3s;
 				&:hover {
-					color:$blue;
+					color:white;	
 				}
 			}
+			
+			.pet-image {
+				text-align: center;
+				margin-bottom: 25px;
 
-			img {
-				height: 200px;
-				overflow: hidden;
-				border-radius: 25px;
+				img {
+					height: 200px;
+					overflow: hidden;
+					border-radius: 10px;
+				}
 			}
 		}
 	}
