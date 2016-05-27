@@ -111,9 +111,10 @@ petApp.displayPets = function () {
 	        }
 		});
 		console.log(filteredPets);
+		var animalCategory = $('input[name=animalSelect]:checked').val();
 
-		if (filteredPets === false) {
-			alert('test');
+		if (typeof filteredPets[0] === 'undefined') {
+			alert('Sorry, there doesn\'t appear to be any ' + animalCategory + ' in your area.');
 		}
 
 		const petTemplate = $('#petTemplate').html();
