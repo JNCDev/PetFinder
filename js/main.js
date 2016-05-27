@@ -16,6 +16,10 @@ var userLocation = {};
 petApp.init = function () {
 	// petApp.getLocationData();
 	petApp.getUserLocation();
+	$('#postalSubmit').on('click', function(){
+		$('.results').empty();
+		$('input[name=animalSelect]').attr('checked',false);
+	});
 	// petApp.getData();
 
 	// petApp.getLocationData(userLocation);
