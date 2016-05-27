@@ -106,10 +106,15 @@ petApp.displayPets = function() {
 		var filteredPets = petApp.pets.filter(function(value){
 			if (value != undefined) {
 			// console.log(value)
-	            return value.animal.$t === $('input[name=animalSelect]:checked').val();
+			var userInput = $('input[name=animalSelect]:checked').val();
+	            return value.animal.$t === userInput;
 	        }
 		});
-		// console.log(filteredPets);
+		console.log(filteredPets);
+
+		if (filteredPets === false) {
+			alert('test');
+		}
 
 		const petTemplate = $('#petTemplate').html();
 		const template = Handlebars.compile(petTemplate);
