@@ -105,10 +105,10 @@ petApp.displayPets = function () {
 		//Work with pet data
 		var filteredPets = petApp.pets.filter(function (value) {
 			if (value != undefined) {
-			// console.log(value)
-			var userInput = $('input[name=animalSelect]:checked').val();
-	            return value.animal.$t === userInput;
-	        }
+				// console.log(value)
+				var userInput = $('input[name=animalSelect]:checked').val();
+				return value.animal.$t === userInput;
+			}
 		});
 		console.log(filteredPets);
 		var animalCategory = $('input[name=animalSelect]:checked').val();
@@ -117,6 +117,7 @@ petApp.displayPets = function () {
 			alert('Sorry, there doesn\'t appear to be any ' + animalCategory + ' in your area.');
 		}
 
+<<<<<<< HEAD
 		const petTemplate = $('#petTemplate').html();
 		const template = Handlebars.compile(petTemplate);
 		filteredPets.forEach(function(pet){
@@ -136,6 +137,26 @@ petApp.displayPets = function () {
 
 		$(".results").append(fillTemplate);
 
+=======
+		var petTemplate = $('#petTemplate').html();
+		var template = Handlebars.compile(petTemplate);
+		filteredPets.forEach(function (pet) {
+
+			var petInfo = {
+				name: pet.name.$t,
+				age: pet.age.$t,
+				sex: pet.sex.$t,
+				breed: pet.breeds.breed.$t,
+				description: pet.description.$t,
+				photo: pet.media.photos.photo[2].$t,
+				shelter: 'https://www.petfinder.com/petdetail/' + pet.id.$t,
+				address: pet.contact.address1.$t,
+				city: pet.contact.city.$t
+			};
+			var fillTemplate = template(petInfo);
+
+			$(".results").append(fillTemplate);
+>>>>>>> c977cb6604b24faa333e8d7cacfb9fde3503f61c
 		});
 	});
 };
