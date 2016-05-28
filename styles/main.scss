@@ -24,8 +24,8 @@ h6 {
 }
 
 h1 {
-	font-size: 8rem;
-	line-height: 8rem;
+	font-size: 5rem;
+    line-height: 5rem;
 }
 
 h2 {
@@ -54,6 +54,10 @@ ul {
 li {
 	list-style: none;
 	font-size: 1.4rem;
+}
+
+img {
+	max-width: 100%;
 }
 
 input[type=radio] {
@@ -93,38 +97,22 @@ header {
 		flex-flow:row wrap;
 		justify-content:flex-start;
 		align-items:center;
-
-		.gecko {
-			width:100%;
-			display: flex;
-			flex-flow:row wrap;
-			justify-content:flex-start;
-			align-items:center;
-
-			svg {
-				width:25%;
-				fill:$hazel;
-				}
-		}	
 		
 		.company-logo {
 			width:40%;
 			margin-right: 25px;
-			align-self:flex-start;
-
-			h1 {
-				margin:0;
-			}
 			
-			display:flex;
-			flex-direction:column;
-			justify-content:flex-start;
-			align-items:flex-start;
+			img {
+				width:80%;
+				}
 
 		}
 		
 		.intro {
 			width:calc(60% - 25px);
+			h1 {
+				margin:0;
+			}
 		}
 	}
 
@@ -140,7 +128,7 @@ form#userLocationInput {
 	align-items:flex-start;
 		input#userPostalCode {
 			outline:none;
-			width:50%;
+			width: 50%;
 			height:50px;
 			padding:10px;
 			border-radius: 10px;
@@ -204,8 +192,7 @@ label {
 	border: 2px dotted $mainColor;
 	background: $hazel;
 	display:block;
-
-	height: auto;
+	min-height: 280px;
 	padding:50px;
 	border-radius: 10px;
 	width:calc(100% / 4 - 25px);
@@ -216,15 +203,18 @@ label {
 		background:darken($hazel, 20);
 		border:2px solid;
 	}
-	svg {
-		fill:$mainColor;
+	img {
+		max-width:100%;
 	}
 }
 
 .dynamic {
-	h2 {
+	.regTitle {
 		text-align: center;
 		color:lighten($blue,10);
+	}
+	.miniTitle {
+		visibility: hidden;
 	}
 
 	background: darken($blue,20);
@@ -262,7 +252,7 @@ label {
 				margin-bottom: 25px;
 
 				img {
-					height: 200px;
+					height: 150px;
 					overflow: hidden;
 					border-radius: 10px;
 				}
@@ -271,6 +261,97 @@ label {
 	}
 }
 
+//Media Queries
+
+/* Portrait tablet and small desktops */
+@media (max-width: 1040px) {
+	.dynamic {
+		.results {
+			.pet {
+	    		width: calc(100% / 2 - 15px);
+		   	}
+		}
+	}
+	header {
+		.intro {
+			p {
+				font-size: 1.2rem;
+			}
+		}
+	}
+	form#userLocationInput {
+		input#userPostalCode {
+			font-size: 1.2rem;
+		}
+	}
+}
+/* Landscape phone to portrait tablet */
+@media (max-width: 850px) {
+    	.wrapper {
+    		width: 90%;
+    	}
+	header {
+		height: auto;
+		padding: 25px 0;
+		.wrapper {
+			flex-flow: column;
+			align-items: flex-start;
+			height: auto;
+			// width: 90%;
+		}
+    		.intro {
+    			width: 80%;
+    			text-align: left;
+    		}
+    }
+	.dynamic {
+		.results {
+	    	flex-flow: column wrap;
+	    	.pet {
+	    		width: calc(100% - 15px);
+	    		.pet-image {
+	    			img {
+	    		    	height: 200px;
+	    		    }
+    		    }
+	    	}
+	    }
+	}
+}
+
+@media (max-width: 670px) {
+	.dynamic h2 {
+		font-size: 1.4rem;
+	}
+
+	form#userLocationInput {
+    	input#userPostalCode {
+    		width: 100%;
+    			}
+    		}
+}
+/* Landscape phones and down */
+@media (max-width: 550px) {
+		.dynamic {
+			.regTitle {
+				visibility: hidden;
+			}
+			.miniTitle {
+				visibility: visible;
+				text-align: center;
+				color:lighten($blue,10);
+			}
+			.results {
+		    	.pet {
+		    		.pet-image {
+		    			img {
+		    		    	max-height: 150px;
+	    		    }
+    		    }
+	    	}
+	    }
+    }
+}
 
 
 
