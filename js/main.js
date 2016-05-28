@@ -117,27 +117,6 @@ petApp.displayPets = function () {
 			alert('Sorry, there doesn\'t appear to be any ' + animalCategory + ' in your area.');
 		}
 
-<<<<<<< HEAD
-		const petTemplate = $('#petTemplate').html();
-		const template = Handlebars.compile(petTemplate);
-		filteredPets.forEach(function(pet){
-
-		const petInfo = {
-			name: pet.name.$t,
-			age: pet.age.$t,
-			sex: pet.sex.$t,
-			breed: pet.breeds.breed.$t,
-			description: pet.description.$t,
-			photo: pet.media.photos.photo[2].$t,
-			shelter: 'https://www.petfinder.com/petdetail/' + pet.id.$t,
-			address: pet.contact.address1.$t,
-			city: pet.contact.city.$t
-		}
-		const fillTemplate = template(petInfo);
-
-		$(".results").append(fillTemplate);
-
-=======
 		var petTemplate = $('#petTemplate').html();
 		var template = Handlebars.compile(petTemplate);
 		filteredPets.forEach(function (pet) {
@@ -156,11 +135,21 @@ petApp.displayPets = function () {
 			var fillTemplate = template(petInfo);
 
 			$(".results").append(fillTemplate);
->>>>>>> c977cb6604b24faa333e8d7cacfb9fde3503f61c
 		});
 	});
 };
 
+function adjustHeights(elem) {
+      var fontstep = 2;
+      if ($(elem).height()>$(elem).parent().height() || $(elem).width()>$(elem).parent().width()) {
+        $(elem).css('font-size',(($(elem).css('font-size').substr(0,2)-fontstep)) + 'px').css('line-height',(($(elem).css('font-size').substr(0,2))) + 'px');
+        adjustHeights(elem);
+      }
+    }
+
 $(function () {
 	petApp.init();
+	setTimeout(function(){ 
+		adjustHeights('.too_big'); 
+	}, 100); 
 });
