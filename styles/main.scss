@@ -34,6 +34,7 @@ h2 {
 
 h4 {
 	font-size: 1.2rem;
+	margin-top: 0;
 }
 
 body {
@@ -43,7 +44,8 @@ body {
 }
 
 p {
-	font-size: 1.4rem;
+	font-size: 1.2rem;
+	line-height: 1.92rem;
 }
 
 ul {
@@ -53,7 +55,7 @@ ul {
 
 li {
 	list-style: none;
-	font-size: 1.4rem;
+	font-size: 1.2rem;
 }
 
 img {
@@ -76,9 +78,16 @@ section {
 	margin:0 auto;
 }
 
+.truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 header {
 	margin:0;
-	background: linear-gradient(rgba(65,117,5,0.5),rgba(65,117,5,0.5)), url('../images/silver_scales/silver_scales.png');
+	background: linear-gradient(rgba(65,117,5,0.7),rgba(65,117,5,0.7)), url('../images/black_scales/black_scales_@2X.png');
 	
 	height: 100vh;
 
@@ -132,11 +141,12 @@ form#userLocationInput {
 			height:50px;
 			padding:10px;
 			border-radius: 10px;
-			font-size: 1.4rem;
+			font-size: 1.2rem;
 			text-align: center;
 			background: none;
 			border:1px solid white;
 			transition:all 0.3s;
+			color:white;
 
 			&:focus,
 			&:hover {
@@ -146,7 +156,8 @@ form#userLocationInput {
 				}
 
 			}
-			&:focus {
+			&:focus,
+			&:active {
 				background:white;
 				color:$hazel;
 			}
@@ -158,25 +169,24 @@ form#userLocationInput {
 			outline:none;
 			border:none;
 			padding:15px 25px;
-			background: $green;
-			color:white;
+			background: $hazel;
+			color:$green;
 			border-radius: 10px;
 			margin:25px 0;
-			font-size: 1.4rem;
-			transition:background, color, 0.3s;
+			font-size: 1.2rem;
+			transition:background 0.3s;
 			&:hover {
 				background:white;
-				color:$green;
 			}
 		}
 }
 
 input[type="text"]::-webkit-input-placeholder {
-	color:white;
+	color:rgba(255,255,255,0.5);
 }
 
 .choose-animal {
-	background:$hazel;
+	background: linear-gradient(rgba(203,197,122,0.7),rgba(203,197,122,0.7)), url('../images/subtle_white_feathers/subtle_white_feathers_@2X.png');
 	text-align: center;
 	
 	.animal-categories {
@@ -188,36 +198,51 @@ input[type="text"]::-webkit-input-placeholder {
 }
 
 label {
-	font-size: 1.4rem;
+	font-size: 1.2rem;
 	border: 2px dotted $mainColor;
 	background: $hazel;
 	display:block;
-	min-height: 280px;
-	padding:50px;
+    min-height: 180px;
+	padding:25px 10px;
 	border-radius: 10px;
-	width:calc(100% / 4 - 25px);
-	margin-right: 25px;
+	width:calc(100% / 2 - 25px);
+	margin:0 25px 25px 0;
 	text-align: center;
 	transition:all 0.3s;
+
+	display:flex;
+	flex-flow:row wrap;
+	justify-content:flex-start;
+	align-items: center;
+
 	&:hover {
 		background:darken($hazel, 20);
 		border:2px solid;
 	}
-	img {
-		max-width:100%;
+
+	.icon {
+		width:50%;
+		img {
+			max-width:100%;
+		}
+	}
+
+	.title {
+		width:50%;
+		text-align: left;
 	}
 }
 
 .dynamic {
 	.regTitle {
 		text-align: center;
-		color:lighten($blue,10);
+		color:darken($blue,20);
 	}
-	.miniTitle {
-		visibility: hidden;
-	}
+	// .miniTitle {
+	// 	visibility: hidden;
+	// }
 
-	background: darken($blue,20);
+	background: linear-gradient(rgba(166,201,210,0.7),rgba(166,201,210,0.7)), url('../images/upfeathers/upfeathers.png');
 
 	.results {
 		display:flex;
@@ -247,17 +272,68 @@ label {
 				}
 			}
 			
-			.pet-image {
+			.pet-name {
 				text-align: center;
-				margin-bottom: 25px;
+			}
 
-				img {
-					height: 150px;
-					overflow: hidden;
-					border-radius: 10px;
+			.pet-information {
+				.pet-image {
+					text-align: center;
+					margin-bottom: 25px;
+
+					img {
+						max-height: 180px;
+						overflow: hidden;
+						border-radius: 10px;
+					}
 				}
 			}
+			
 		}
+	}
+
+	.returnTop {
+		text-align: center;
+		button {
+			outline:none;
+			border:none;
+			padding:15px 25px;
+			background: darken($blue,20);
+			color:white;
+			border-radius: 10px;
+			margin:25px 0;
+			font-size: 1.2rem;
+			transition:background 0.3s;
+			&:hover {
+				background:$blue;
+			}
+		}
+	}
+}
+
+footer {
+  background: $mainColor;
+  padding: 25px 0;
+}
+
+footer .credits {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+
+	p,
+	a {
+		font-size: 0.8rem;
+		line-height: 1.4rem;
+		color: white;
+	}
+
+	a {
+		text-decoration: none;
+		transition: color 0.3s;
+		&:hover {
+			color: $blue;
+	  	}
 	}
 }
 
@@ -265,63 +341,79 @@ label {
 
 /* Portrait tablet and small desktops */
 @media (max-width: 1040px) {
-	.dynamic {
-		.results {
-			.pet {
-	    		width: calc(100% / 2 - 15px);
-		   	}
-		}
-	}
-	header {
-		.intro {
-			p {
-				font-size: 1.2rem;
-			}
-		}
-	}
-	form#userLocationInput {
-		input#userPostalCode {
-			font-size: 1.2rem;
-		}
-	}
+	.dynamic .wrapper .results .pet {
+		width: calc(100% / 2 - 15px);
+   	}	
 }
+
 /* Landscape phone to portrait tablet */
 @media (max-width: 850px) {
-    	.wrapper {
-    		width: 90%;
-    	}
+	h2 {
+    	font-size: 1.4rem;
+    }
+
 	header {
 		height: auto;
-		padding: 25px 0;
+		padding: 50px 0;
+
 		.wrapper {
-			flex-flow: column;
+			flex-flow: column wrap;
 			align-items: flex-start;
 			height: auto;
-			// width: 90%;
-		}
+    		
+			.company-logo {
+				width: 100%;
+				margin-bottom: 25px;
+				img {
+					width:40%;
+				}
+			}
+
     		.intro {
-    			width: 80%;
+    			width: 100%;
     			text-align: left;
     		}
+		}
     }
-	.dynamic {
-		.results {
-	    	flex-flow: column wrap;
-	    	.pet {
-	    		width: calc(100% - 15px);
-	    		.pet-image {
-	    			img {
-	    		    	height: 200px;
-	    		    }
-    		    }
+
+	.dynamic .wrapper .results .pet {
+	    width: 100%;
+	    margin:0 0 25px 0;
+	    padding: 25px;
+	    
+	    .pet-information {
+	    	display: flex;
+	    	flex-flow:row wrap;
+	    	justify-content:center;
+	    	align-items:flex-start;
+
+		    .pet-image {
+		    	width:40%;
+		    	margin: 0 25px 0 0;
+		    	text-align: left;
 	    	}
+
+	    	.pet-description {
+	    		width:calc(60% - 25px);
+	    	}	    	
 	    }
 	}
 }
 
 @media (max-width: 670px) {
-	.dynamic h2 {
-		font-size: 1.4rem;
+
+	.pet .pet-information .pet-image img {
+		height: auto;
+		max-width: 100%;
+	}
+
+	section {
+		padding:25px 0;
+	}
+
+	label {
+		width:100%;
+		margin-right: 0;
 	}
 
 	form#userLocationInput {
@@ -330,29 +422,57 @@ label {
     			}
     		}
 }
+
 /* Landscape phones and down */
 @media (max-width: 550px) {
-		.dynamic {
-			.regTitle {
-				visibility: hidden;
-			}
-			.miniTitle {
-				visibility: visible;
-				text-align: center;
-				color:lighten($blue,10);
-			}
-			.results {
-		    	.pet {
-		    		.pet-image {
-		    			img {
-		    		    	max-height: 150px;
-	    		    }
-    		    }
+	h1 {
+		font-size: 4rem;
+		line-height: 4rem;
+	}
+
+	h2 {
+		font-size: 1.2rem;
+	}
+
+	.dynamic .wrapper .results .pet{
+    	.pet-information {
+	    	display: flex;
+	    	flex-flow:column wrap;
+	    	justify-content:center;
+	    	align-items:center;
+
+		    .pet-image {
+		    	width:100%;
+		    	margin: 0 0 25px 0;
+		    	text-align: center;
 	    	}
-	    }
+
+	    	.pet-description {
+	    		width:100%;
+	    	}	    				
+		}
     }
 }
 
+/* Portrait phones and down */
+@media (max-width: 480px) {
+	h1 {
+		display: none;
+	}
+
+	header .wrapper .company-logo {
+		width: 100%;
+		margin-bottom: 25px;
+		text-align: center;
+		img {
+			width:50%;
+		}
+	}
+}
+
+@media (max-width: 320px) {
+
+}
 
 
 

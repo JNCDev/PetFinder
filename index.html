@@ -11,22 +11,25 @@
 	<!-- OUR TEMPLATES -->
 	<script id="petTemplate" type="x-handlebars-template">
 		<div class="pet">
-           <figure class="pet-image">
+			<div class="pet-name truncate">
                <h4><span class="too_big">Meet {{name}}!</span></h4>
-               <img src="{{#if photo}}{{photo}}{{/if}}">
-           </figure>
-           <div class="pet-description">
-               <ul>
-                   <li>Breed: {{breed}}</li>
-                   <li>Sex: {{sex}}</li>
-                   <li>Age: {{age}}</li>
-                   <li>City: {{city}}</li>
-               </ul>
-               <ul>
-               <p>
-                   <a href="{{shelter}}" target="_blank">More Info</a>
-               </p>    
-           </div>
+        	</div>
+        	<div class="pet-information">
+	        	<figure class="pet-image">
+	            	<img src="{{#if photo}}{{photo}}{{/if}}">
+	        	</figure>
+	        	<div class="pet-description">
+	            	<ul>
+	                	<li>Breed: {{breed}}</li>
+	                	<li>Sex: {{sex}}</li>
+	                	<li>Age: {{age}}</li>
+	                	<li>City: {{city}}</li>
+	            	</ul>
+	            	<p>
+	                	<a href="{{shelter}}" target="_blank">More Info</a>
+	            	</p>    
+	           </div>
+	        </div> 
        </div>
 	</script>
 	<!-- END TEMPLATES -->
@@ -41,9 +44,10 @@
 			</div>
 			<div class="intro">
 				<h1>Small<br>& Scaly</h1>
-				<p>There are many cats and dogs available for adoption throughout North America ­ but other animals need forever homes too! Use the Small and Scaly app powered by Petfinder to help you find your next small or scaly pal! Please enter your Postal Code Below</p>
+				<p>There are many cats and dogs available for adoption throughout North America ­ but other animals need forever homes too! Use the Small & Scaly app powered by Petfinder to help you find your next small or scaly pal!</p> 
+				<p>Please enter your postal code:</p>
 				<form action="#two" id="userLocationInput" class="postal-input" autocomplete="off">
-					<input type="text" placeholder="A1A 1A1" id="userPostalCode">
+					<input type="text" placeholder="example: A1A 1A1" id="userPostalCode">
 					<input type="submit" id="postalSubmit" value="submit">
 				</form>
 			</div>
@@ -56,33 +60,61 @@
 			<form action="#three" class="animal-categories">
 				<input type="radio" id="Rabbit" name="animalSelect" value="Rabbit">
 				<label for="Rabbit">
-					<img src="images/icon_rabbit.png" alt="filter all rabbits">
-					<p>Rabbit</p>
+					<figure class="icon">
+						<img src="images/icon_rabbit.png" alt="filter all rabbits">
+					</figure>
+					<div class="title">
+						<p>Rabbit</p>
+					</div>
 				</label>
 				<input type="radio" id="smallfurry" name="animalSelect" value="Small & Furry">
 				<label for="smallfurry">
-					<img src="images/icon_furry.png" alt="filter all small and furry">
-					Small & Furry</label>
+					<figure class="icon">
+						<img src="images/icon_furry.png" alt="filter all small and furry">
+					</figure>
+					<div class="title">
+						<p>Small & Furry</p>
+					</div>
+				</label>
 				<input type="radio" id="scales" name="animalSelect" value="Scales, Fins & Other">
 				<label for="scales">
-					<img src="images/icon_scales.png" alt="filter all scales, fins & other">
-					Scales, Fins & Other</label>
+					<figure class="icon">
+						<img src="images/icon_scales.png" alt="filter all scales, fins & other">
+					</figure>
+					<div class="title">
+						<p>Scales, Fins & Other</p>
+					</div>
+				</label>
 				<input type="radio" id="birds" name="animalSelect" value="Bird">
 				<label for="birds">
-					<img src="images/icon_bird.png" alt="filter all birds">
-					Birds</label>
+					<figure class="icon">
+						<img src="images/icon_bird.png" alt="filter all birds">
+					</figure>
+					<div class="title">
+						<p>Birds</p>
+					</div>
+				</label>
 			</form>
 		</div>
 	</section>
 
 	<section class="dynamic" id="three">
 		<div class="wrapper">
-			<h2 class="regTitle">&#9829; Animals That Need Some Love &#9829;</h2>
-			<h2 class="miniTitle"> Animals That Need Some Love </h2>
+			<h2 class="regTitle">Animals That Need Some Love</h2>
+			<!-- <h2 class="miniTitle"> Animals That Need Some Love </h2> -->
 			<div class="results"></div>
-			<a href="">Back To Top</a>
+			<div class="returnTop">
+				<a href="#"><button>Return to top</button></a>
+			</div>	
 		</div>
 	</section>
+	
+	<footer>
+		<article class="credits">
+			<p>Designed and developed by <a href="http://jfong.design/" target="blank">Johnathan Fong</a>, <a href="http://itscaitlinlucy.com/" target="_blank">Caitlin MacMinn</a> &amp; <a href="http://nonnavolodina.com/" target="_blank">Nonna Volodina</a> | Powered by <a href="https://petfinder.com/" target="_blank">Pet Finder</a> | Icons courtesy of <a href="https://thenounproject.com/" target="_blank">The Noun Project</a> | Patterns courtesy of <a href="http://subtlepatterns.com/" target="_blank">Subtle Patterns</a></p>
+		</article>
+	</footer>
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js'></script>
