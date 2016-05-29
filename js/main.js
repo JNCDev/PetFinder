@@ -23,6 +23,7 @@ petApp.init = function () {
 	$(".returnTop").on('click', function(e) {
 		event.preventDefault(e);
 		$('html, body').animate ({
+			//smooth scroll
         	scrollTop: $("#one").offset().top
     	}, 2000);
 	})
