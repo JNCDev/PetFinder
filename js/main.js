@@ -20,12 +20,12 @@ petApp.init = function () {
 		$('.results').empty();
 		$('input[name=animalSelect]').attr('checked', false);
 	});
-	$(".returnTop").on('click', function(e) {
+	$(".returnTop").on('click', function (e) {
 		event.preventDefault(e);
-		$('html, body').animate ({
-        	scrollTop: $("#one").offset().top
-    	}, 2000);
-	})
+		$('html, body').animate({
+			scrollTop: $("#one").offset().top
+		}, 2000);
+	});
 	// petApp.getData();
 
 	// petApp.getLocationData(userLocation);
@@ -38,11 +38,11 @@ petApp.getUserLocation = function () {
 		document.getElementById('userLocationInput').reset();
 		console.log(userLocation);
 		petApp.getLocationData(userLocation);
-		
+
 		//smooth scroll
-    	$('html, body').animate ({
-        	scrollTop: $("#two").offset().top+100 
-    	}, 1000);
+		$('html, body').animate({
+			scrollTop: $("#two").offset().top + 100
+		}, 1000);
 	});
 };
 
@@ -113,9 +113,9 @@ petApp.displayPets = function () {
 	// $('#userPostalCode')
 	$('input[name=animalSelect]').on('click', function (res) {
 		//smooth scroll
-		$('html, body').animate ({
-        	scrollTop: $("#three").offset().top+80
-    	}, 1000);
+		$('html, body').animate({
+			scrollTop: $("#three").offset().top + 80
+		}, 1000);
 		$('.results').empty();
 		//Work with pet data
 		var filteredPets = petApp.pets.filter(function (value) {
@@ -150,25 +150,24 @@ petApp.displayPets = function () {
 			var fillTemplate = template(petInfo);
 
 			$(".results").append(cleanup(fillTemplate));
-
 		});
 	});
-			var cleanup=function(string){
-				return string.replace(/ *\([^)]*\) */g, "");
-			};
+	var cleanup = function cleanup(string) {
+		return string.replace(/ *\([^)]*\) */g, "");
+	};
 };
 
 function adjustHeights(elem) {
-      var fontstep = 2;
-      if ($(elem).height()>$(elem).parent().height() || $(elem).width()>$(elem).parent().width()) {
-        $(elem).css('font-size',(($(elem).css('font-size').substr(0,2)-fontstep)) + 'px').css('line-height',(($(elem).css('font-size').substr(0,2))) + 'px');
-        adjustHeights(elem);
-      }
-    }
+	var fontstep = 2;
+	if ($(elem).height() > $(elem).parent().height() || $(elem).width() > $(elem).parent().width()) {
+		$(elem).css('font-size', $(elem).css('font-size').substr(0, 2) - fontstep + 'px').css('line-height', $(elem).css('font-size').substr(0, 2) + 'px');
+		adjustHeights(elem);
+	}
+}
 
 $(function () {
 	petApp.init();
-	setTimeout(function(){ 
-		adjustHeights('.too_big'); 
-	}, 100); 
+	setTimeout(function () {
+		adjustHeights('.too_big');
+	}, 100);
 });
