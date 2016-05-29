@@ -228,13 +228,6 @@ section {
   margin: 0 auto;
 }
 
-.truncate {
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 header {
   margin: 0;
   background: linear-gradient(rgba(65, 117, 5, 0.7), rgba(65, 117, 5, 0.7)), url("../images/black_scales/black_scales_@2X.png");
