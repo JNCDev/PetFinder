@@ -38,11 +38,10 @@ petApp.getUserLocation = function () {
 		document.getElementById('userLocationInput').reset();
 		console.log(userLocation);
 		petApp.getLocationData(userLocation);
-
 		//smooth scroll
-		$('html, body').animate({
-			scrollTop: $("#two").offset().top + 100
-		}, 1000);
+    	$('html, body').animate ({
+        	scrollTop: $("#two").offset().top
+    	}, 1000);
 	});
 };
 
@@ -113,9 +112,9 @@ petApp.displayPets = function () {
 	// $('#userPostalCode')
 	$('input[name=animalSelect]').on('click', function (res) {
 		//smooth scroll
-		$('html, body').animate({
-			scrollTop: $("#three").offset().top + 80
-		}, 1000);
+		$('html, body').animate ({
+        	scrollTop: $("#three").offset().top
+    	}, 1000);
 		$('.results').empty();
 		//Work with pet data
 		var filteredPets = petApp.pets.filter(function (value) {
