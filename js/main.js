@@ -129,7 +129,7 @@ petApp.displayPets = function () {
 		var animalCategory = $('input[name=animalSelect]:checked').val();
 
 		if (typeof filteredPets[0] === 'undefined') {
-			alert('Sorry, there doesn\'t appear to be any ' + animalCategory + ' in your area.');
+			alert('Sorry, there doesn\'t appear to be any pets available in your area, matching your search for ' + animalCategory + '. Please select a different category.');
 		}
 
 		var petTemplate = $('#petTemplate').html();
