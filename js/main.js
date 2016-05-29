@@ -41,7 +41,7 @@ petApp.getUserLocation = function () {
 		
 		//smooth scroll
     	$('html, body').animate ({
-        	scrollTop: $("#two").offset().top+100 
+        	scrollTop: $("#two").offset().top
     	}, 1000);
 	});
 };
@@ -114,7 +114,7 @@ petApp.displayPets = function () {
 	$('input[name=animalSelect]').on('click', function (res) {
 		//smooth scroll
 		$('html, body').animate ({
-        	scrollTop: $("#three").offset().top+80
+        	scrollTop: $("#three").offset().top
     	}, 1000);
 		$('.results').empty();
 		//Work with pet data
