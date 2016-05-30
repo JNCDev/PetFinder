@@ -5,43 +5,41 @@
 // Step 4: Display all animals available at the shelters in the user's vicinity that match their animal filter
 // Step 5: User has the option to advance filter animals by breed
 // Step 6: Display all animals (Image, Name, Breed, Gender, Age, Shelter, Location) that match their criteria
-// Step 7: If user is interested in a specific animal, they can click on the animal
-// and it will link to the shelter
+// Step 7: If user is interested in a specific animal, they can click on the animal and it will link to the shelter
+
 var petApp = {};
 var userLocation = {};
+
 petApp.init = function () {
-    // petApp.getLocationData();
     petApp.getUserLocation();
-    $('#postalSubmit').on('click', function () {
+    $('#postalSubmit').on('click', function() {
         $('.results').empty();
         $('input[name=animalSelect]').attr('checked', false);
     });
     $(".returnTop").on('click', function(e) {
         event.preventDefault(e);
         $('html, body').animate ({
-            //smooth scroll
-            scrollTop: $("#one").offset().top
+            //Smooth Scroll from bottom of pet display section to top of pet selection section
+            scrollTop: $("#two").offset().top
         }, 2000);
     })
-    // petApp.getData();
-    // petApp.getLocationData(userLocation);
-    // console.log(userLocation);
 };
-petApp.getUserLocation = function () {
-    $('#userLocationInput').on('submit', function (e) {
+
+petApp.getUserLocation = function() {
+    $('#userLocationInput').on('submit', function(e) {
         e.preventDefault();
         var userLocation = $('#userPostalCode').val();
         document.getElementById('userLocationInput').reset();
         console.log(userLocation);
         petApp.getLocationData(userLocation);
-        
-        //smooth scroll
+        //Smooth Scroll from Postal Code input to top of pet selection section
         $('html, body').animate ({
             scrollTop: $("#two").offset().top
         }, 1000);
     });
 };
-petApp.getLocationData = function (data) {
+
+petApp.getLocationData = function(data) {
     var postalCode = data;
     $.ajax({
         url: 'http://api.petfinder.com/shelter.find',
@@ -52,24 +50,20 @@ petApp.getLocationData = function (data) {
             location: postalCode,
             format: 'json'
         }
-    }). // count: 10 // This will help limit the number of shelters. The first object returned is closest location
-    then(function (results) {
-        console.log(results);
+    }). then(function(results) {
         if (results.petfinder.shelters != undefined) {
             var shelterResults = results.petfinder.shelters.shelter;
-            var shelterIDs = shelterResults.map(function (a) {
+            var shelterIDs = shelterResults.map(function(a) {
                 return a.id["$t"];
             });
         } else {
-            alert('Sorry! There were no results found for ' + postalCode + '. Please try again');
+            alert('Sorry! There were no results found for ' + postalCode + '. Please try again.');
         };
-        console.log(shelterIDs);
         petApp.getData(shelterIDs);
     });
 };
-// var petFind = {};
-petApp.getData = function (shelterIDs) {
-    console.log(shelterIDs);
+
+petApp.getData = function(shelterIDs) {
     var shelterCalls = shelterIDs.map(function (id) {
         return $.ajax({
             url: 'http://api.petfinder.com/shelter.getPets',
@@ -82,45 +76,43 @@ petApp.getData = function (shelterIDs) {
             }
         });
     });
+    //The Ajax call returns multiple arrays of data
     $.when.apply(null, shelterCalls).then(function () {
         var data = Array.prototype.slice.call(arguments);
         data = data.map(function (pets) {
             return pets[0].petfinder.pets.pet;
         });
-        //Here is your pets
-        //Flatten array of pets
-        data = data.reduce(function (prev, next) {
+        //Flatten the multiple arrays into one manageable array
+        data = data.reduce(function(prev, next) {
             return prev.concat(next);
         }, []);
-        console.log(data);
         petApp.pets = data;
         petApp.displayPets();
     });
 };
-petApp.displayPets = function () {
-    // $('#userPostalCode')
-    $('input[name=animalSelect]').on('click', function (res) {
-        //smooth scroll
+
+petApp.displayPets = function() {
+    $('input[name=animalSelect]').on('click', function(res) {
+        //Smooth Scroll from pet selection section to top of pet display section
         $('html, body').animate ({
             scrollTop: $("#three").offset().top
         }, 1000);
         $('.results').empty();
-        //Work with pet data
-        var filteredPets = petApp.pets.filter(function (value) {
+        //Filter array of pet data by User's selection
+        var filteredPets = petApp.pets.filter(function(value) {
             if (value != undefined) {
-                // console.log(value)
                 var userInput = $('input[name=animalSelect]:checked').val();
                 return value.animal.$t === userInput;
             }
         });
-        console.log(filteredPets);
         var animalCategory = $('input[name=animalSelect]:checked').val();
         if (typeof filteredPets[0] === 'undefined') {
-            alert('Sorry, there doesn\'t appear to be any ' + animalCategory + ' in your area.');
+            alert('Sorry, it seems your selection of ' + animalCategory + ', hasn\'t returned any results in your area. Please make another selection.');
         }
+        //Use Handlebar template to display pet data
         var petTemplate = $('#petTemplate').html();
         var template = Handlebars.compile(petTemplate);
-        filteredPets.forEach(function (pet) {
+        filteredPets.forEach(function(pet) {
             var petInfo = {
                 name: pet.name.$t,
                 age: pet.age.$t,
@@ -132,24 +124,27 @@ petApp.displayPets = function () {
                 address: pet.contact.address1.$t,
                 city: pet.contact.city.$t
             };
+            //Push template to the page for each animal
             var fillTemplate = template(petInfo);
             $(".results").append(cleanup(fillTemplate));
         });
     });
-            var cleanup=function(string){
-                return string.replace(/ *\([^)]*\) */g, "");
-            };
+	var cleanup=function(string) {
+	    return string.replace(/ *\([^)]*\) */g, "");
+	};
 };
+
 function adjustHeights(elem) {
-      var fontstep = 2;
-      if ($(elem).height()>$(elem).parent().height() || $(elem).width()>$(elem).parent().width()) {
-        $(elem).css('font-size',(($(elem).css('font-size').substr(0,2)-fontstep)) + 'px').css('line-height',(($(elem).css('font-size').substr(0,2))) + 'px');
-        adjustHeights(elem);
-      }
-    }
-$(function () {
+	var fontstep = 2;
+	if ($(elem).height()>$(elem).parent().height() || $(elem).width()>$(elem).parent().width()) {
+	$(elem).css('font-size',(($(elem).css('font-size').substr(0,2)-fontstep)) + 'px').css('line-height',(($(elem).css('font-size').substr(0,2))) + 'px');
+	adjustHeights(elem);
+	}
+}
+
+$(function() {
     petApp.init();
-    setTimeout(function(){ 
+    setTimeout(function() { 
         adjustHeights('.too_big'); 
     }, 100); 
 });
