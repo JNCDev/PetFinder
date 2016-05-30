@@ -1,2 +1,6 @@
 # PetFinder
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos quos ipsa consequuntur illum, commodi aliquid id sunt qui? Excepturi facilis vel, ex ipsum earum soluta accusamus modi, vitae amet quo deleniti quae unde? Repudiandae iure libero, nesciunt tempora amet maxime soluta officiis error, impedit in consectetur. Nam dolores explicabo, omnis. Incidunt voluptas voluptate cum ullam deserunt reprehenderit suscipit recusandae rerum nulla, doloremque rem excepturi officiis ea quisquam eum possimus minima, ratione corporis natus deleniti nobis accusantium et dolorum tempore. Quam magni pariatur qui, atque, fugit totam, autem quidem laborum dignissimos ratione assumenda nisi. Laudantium veniam inventore, totam voluptatum quo nobis.
+
+### Created by JNC Dev
+#### Johnathan Fong, Nonna Volodina & Caitlin MacMinn
+
+The Small & Scaley Petfinder App was designed to help users find rabbits, reptiles, birds, and small & furry animals in their area that are available for adoption. 
