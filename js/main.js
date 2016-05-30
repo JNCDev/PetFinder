@@ -58,6 +58,10 @@ petApp.getLocationData = function(data) {
             });
         } else {
             alert('Sorry! There were no results found for ' + postalCode + '. Please try again.');
+            //removing smooth scroll when user enters invalid/insufficient data postal code
+            $('html, body').animate ({    
+            scrollTop: $("#one")
+            });
         };
         petApp.getData(shelterIDs);
     });
