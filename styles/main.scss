@@ -11,6 +11,8 @@ $mainColor:#444;
 $green: #417505;
 $blue: #A6C9D2;
 $hazel: #CBC57A;
+$pearlbush: #EAE1D4;
+$light: #F2EEE6;
 
 h1,
 h2,
@@ -23,12 +25,12 @@ h6 {
 }
 
 h1 {
-	font-size: 5rem;
-    line-height: 5rem;
+	font-size: 4.5rem;
+    line-height: 4.5rem;
 }
 
 h2 {
-	font-size: 1.8rem;
+	font-size: 1.6rem;
 }
 
 h4 {
@@ -43,8 +45,15 @@ body {
 }
 
 p {
-	font-size: 1.2rem;
-	line-height: 1.92rem;
+	font-size: 1rem;
+	line-height: 1.76rem;
+}
+
+.too-big {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 ul {
@@ -54,7 +63,7 @@ ul {
 
 li {
 	list-style: none;
-	font-size: 1.2rem;
+	font-size: 1rem;
 }
 
 img {
@@ -79,33 +88,35 @@ section {
 
 header {
 	margin: 0;
-	background: linear-gradient(rgba(65,117,5,0.7), rgba(65,117,5,0.7)), url('../images/black_scales/black_scales_@2X.png');
+	background: url('../images/pet-turtle.jpg');
+	background-size: cover;
+	background-position: center;
 	height: 100vh;
 	display: flex;
-	flex-flow:column wrap;
-	justify-content:center;
+	flex-flow:row wrap;
+	justify-content:flex-start;
 	align-items:center;	
 	.wrapper {
+		margin-left: 10%;
+		width:600px;
+		border:2px solid white;
+		border-radius: 10px;
+		padding:50px;
+		background: rgba(255,255,255,0.5);
+
 		display: flex;
-		flex-flow: row wrap;
+		flex-flow: column wrap;
 		justify-content: flex-start;
-		align-items: center;
-		h1,
-		p {
-			color: white;
-		}
+		align-items: flex-start;
 		.company-logo {
-			width: 40%;
-			margin-right: 25px;
+			display:flex;
+			flex-flow:column wrap;
 			img {
-				width: 80%;
+				max-width: 100%;
 			}
 		}
 		.intro {
-			width: calc(60% - 25px);
-			h1 {
-				margin: 0;
-			}
+			width: 100%;
 		}
 	}
 }
@@ -117,16 +128,16 @@ form#userLocationInput {
 	align-items: flex-start;
 	input#userPostalCode {
 		outline: none;
-		width: 50%;
+		width: 100%;
 		height: 50px;
 		padding: 10px;
 		border-radius: 10px;
-		font-size: 1.2rem;
+		font-size: 1rem;
 		text-align: center;
 		background: none;
-		border: 1px solid white;
+		border: 1px solid $mainColor;
 		transition: all 0.3s;
-		color: white;
+		color: $mainColor;
 		&:focus,
 		&:hover {
 			background: white;
@@ -144,69 +155,84 @@ form#userLocationInput {
 		outline: none;
 		border: none;
 		padding: 15px 25px;
-		background: $hazel;
-		color: $green;
+		background: $green;
+		color: white;
 		border-radius: 10px;
 		margin: 25px 0;
-		font-size: 1.2rem;
+		margin-bottom: 0;
+		font-size: 1rem;
 		transition: background 0.3s;
 		&:hover {
-			background: white;
+			background: $hazel;
 		}
 	}
 }
 
 input[type="text"]::-webkit-input-placeholder {
-	color: rgba(255,255,255,0.5);
+	color: lighten($mainColor,20);
 }
 
 .choose-animal {
-	background: linear-gradient(rgba(203,197,122,0.7), rgba(203,197,122,0.7)), url('../images/subtle_white_feathers/subtle_white_feathers_@2X.png');
+	background:$pearlbush;
 	text-align: center;
 	.animal-categories {
 		display: flex;
 		flex-flow: row wrap;
 		justify-content: center;
-		align-items: center;
+		align-items: flex-start;
 	}
 }
 
 label {
-	font-size: 1.2rem;
-	border: 2px dotted $mainColor;
-	background: $hazel;
-    min-height: 180px;
-	padding: 25px 10px;
-	border-radius: 10px;
-	width: calc(100% / 2 - 25px);
-	margin: 0 25px 25px 0;
+	font-size: 1rem;
+	padding:25px;
+	width: calc(100% / 4);
 	text-align: center;
 	transition: all 0.3s;
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: column wrap;
 	justify-content: flex-start;
-	align-items: center;
+	align-items: flex-start;
 	&:hover {
-		background: darken($hazel, 20);
-		border: 2px solid;
+		cursor: pointer;
+		.icon .fill {
+			opacity: 0.8;
+		}
+		.title {
+			color:$hazel;
+		}
+		
 	}
 	.icon {
-		width: 50%;
+		width: 100%;
+		position: relative;
+		.fill {
+			position: absolute;
+
+			background: $hazel;
+			width:100%;
+			height:100%;
+			border-radius: 10px;
+			
+			opacity: 0;
+		}
 		img {
+			display: block;
+			border-radius: 10px;
 			max-width: 100%;
 		}
+
 	}
 	.title {
-		width: 50%;
-		text-align: left;
+		text-align: center;
+		width: 100%;
 	}
 }
 
 .dynamic {
-	background: linear-gradient(rgba(166,201,210,0.7), rgba(166,201,210,0.7)), url('../images/upfeathers/upfeathers.png');
+	background:$light;
 	.regTitle {
 		text-align: center;
-		color: darken($blue, 20);
 	}
 	.results {
 		display: flex;
@@ -216,10 +242,10 @@ label {
 		.pet {
 			width: calc(100% / 3 - 15px);
 			margin: 7.5px;
-			padding: 25px;
-			background: lighten($blue, 10);
-			border: 2px dotted white;
+			// padding: 25px;
+			border:2px solid white;
 			border-radius: 10px;
+			background: rgba(255,255,255,0.5);
 			p,
 			a {
 				font-size: 1rem;
@@ -232,17 +258,31 @@ label {
 					color: white;	
 				}
 			}
-			.pet-name {
-				text-align: center;
+			.pet-image {
+				background-size: cover;
+				background-position: center;
+				border-top-left-radius: 10px;
+				border-top-right-radius: 10px;
+				height:250px;
 			}
 			.pet-information {
-				.pet-image {
-					text-align: center;
-					margin-bottom: 25px;
-					img {
-						max-height: 180px;
-						overflow: hidden;
+				padding:25px;
+				.pet-description {
+					li {
+						font-size: 1rem;
+					}
+					.more-info {
+						display: inline-block;
+						background:$hazel;
+						padding:10px;
 						border-radius: 10px;
+						margin-top: 25px;
+						font-size: 0.8rem;
+						color:white;
+						transition:0.3s;
+						&:hover {
+							background: darken($hazel,20);
+						}
 					}
 				}
 			}
@@ -254,14 +294,14 @@ label {
 			outline: none;
 			border: none;
 			padding: 15px 25px;
-			background: darken($blue,20);
+			background: $blue;
 			color: white;
 			border-radius: 10px;
 			margin: 25px 0;
-			font-size: 1.2rem;
+			font-size: 1rem;
 			transition: background 0.3s;
 			&:hover {
-				background: $blue;
+				background: darken($blue,20);
 			}
 		}
 	}
@@ -311,62 +351,62 @@ footer .credits {
 		height: auto;
 		padding: 50px 0;
 		.wrapper {
-			flex-flow: column wrap;
-			align-items: flex-start;
-			height: auto;
-			.company-logo {
-				width: 100%;
-				margin-bottom: 25px;
-				img {
-					width: 40%;
-				}
-			}
-    		.intro {
-    			width: 100%;
-    			text-align: left;
-    		}
+			width:80%;
+			margin:0 auto;
 		}
     }
+
+    label {
+    	padding:0px;
+    	.icon img {
+    		display: inline-block;
+    		width:80%;
+    	}
+    }
+
 	.dynamic .wrapper .results .pet {
 	    width: 100%;
 	    margin: 0 0 25px 0;
-	    padding: 25px;
-	    .pet-information {
-	    	display: flex;
-	    	flex-flow: row wrap;
-	    	justify-content: center;
-	    	align-items: flex-start;
-		    .pet-image {
-		    	width: 40%;
-		    	margin: 0 25px 0 0;
-		    	text-align: left;
-	    	}
-	    	.pet-description {
-	    		width: calc(60% - 25px);
-	    	}	    	
-	    }
+	    text-align: center;
 	}
 }
 
 @media (max-width: 670px) {
-	.pet .pet-information .pet-image img {
-		height: auto;
-		max-width: 100%;
-	}
 
 	section {
 		padding: 25px 0;
 	}
 
-	label {
+	.choose-animal label {
 		width: 100%;
-		margin-right: 0;
+		padding:15px 0;
+		
+		display:flex;
+		flex-flow:row wrap;
+		align-items:center;
+
+		.icon {
+			width:50%;
+			img {
+				display: inline-block;
+			}
+		}
+		.title {
+			width:50%;
+			padding:15px;
+			text-align: left;
+		}
 	}
 
 	form#userLocationInput {
     	input#userPostalCode {
     		width: 100%;
 		}
+
+		input[type=submit] {
+			width:100%;
+		}
+
 	}
 }
 
@@ -381,22 +421,19 @@ footer .credits {
 		font-size: 1.2rem;
 	}
 
-	.dynamic .wrapper .results .pet {
-    	.pet-information {
-	    	display: flex;
-	    	flex-flow: column wrap;
-	    	justify-content: center;
-	    	align-items: center;
-		    .pet-image {
-		    	width: 100%;
-		    	margin: 0 0 25px 0;
-		    	text-align: center;
-	    	}
-	    	.pet-description {
-	    		width: 100%;
-	    	}	    				
+	header {
+		height: auto;
+		padding: 50px 0;
+		.wrapper {
+			width:90%;
+			padding:50px 25px;
 		}
     }
+
+	.wrapper {
+		width:90%;
+	}
+
 }
 
 /* Portrait phones and down */
@@ -409,10 +446,8 @@ footer .credits {
 		width: 100%;
 		margin-bottom: 25px;
 		text-align: center;
-		img {
-			width: 50%;
-		}
 	}
+
 }
 
 

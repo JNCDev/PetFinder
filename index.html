@@ -8,42 +8,16 @@
 	<link href='https://fonts.googleapis.com/css?family=Archivo+Black' rel='stylesheet' type='text/css'>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- OUR TEMPLATES -->
-	<script id="petTemplate" type="x-handlebars-template">
-		<div class="pet">
-			<div class="pet-name truncate">
-               <h4><span class="too_big">Meet {{name}}!</span></h4>
-        	</div>
-        	<div class="pet-information">
-	        	<figure class="pet-image">
-	            	<img src="{{#if photo}}{{photo}}{{/if}}">
-	        	</figure>
-	        	<div class="pet-description">
-	            	<ul>
-	                	<li>Breed: {{breed}}</li>
-	                	<li>Sex: {{sex}}</li>
-	                	<li>Age: {{age}}</li>
-	                	<li>City: {{city}}</li>
-	            	</ul>
-	            	<p>
-	                	<a href="{{shelter}}" target="_blank">More Info</a>
-	            	</p>    
-	           </div>
-	        </div> 
-       </div>
-	</script>
-	<!-- END TEMPLATES -->
 </head>
 
 <body>
 	<header id="one">
 		<div class="wrapper">
 			<div class="company-logo">
-				<img src="images/gecko.png" alt="gecko logo">
+				<img src="images/ss-logo-02.png" alt="gecko logo">
 			</div>
 			<div class="intro">
-				<h1>Small<br>& Scaly</h1>
-				<p>There are many cats and dogs available for adoption throughout North America ­ but other animals need forever homes too! Use the Small & Scaly app powered by Petfinder to help you find your next small or scaly pal!</p> 
+				<p>There are many cats and dogs available for adoption throughout North America ­ but other animals need forever homes too! Use the Small &amp; Scaly app powered by Petfinder to help you find your next small or scaly pal!</p> 
 				<p>Please enter your postal code:</p>
 				<form action="#two" id="userLocationInput" class="postal-input" autocomplete="off">
 					<input type="text" placeholder="example: A1A 1A1" id="userPostalCode">
@@ -60,6 +34,7 @@
 				<input type="radio" id="Rabbit" name="animalSelect" value="Rabbit">
 				<label for="Rabbit">
 					<figure class="icon">
+						<div class="fill"></div>
 						<img src="images/icon_rabbit.png" alt="filter all rabbits">
 					</figure>
 					<div class="title">
@@ -69,6 +44,7 @@
 				<input type="radio" id="smallfurry" name="animalSelect" value="Small & Furry">
 				<label for="smallfurry">
 					<figure class="icon">
+						<div class="fill"></div>
 						<img src="images/icon_furry.png" alt="filter all small and furry">
 					</figure>
 					<div class="title">
@@ -78,6 +54,7 @@
 				<input type="radio" id="scales" name="animalSelect" value="Scales, Fins & Other">
 				<label for="scales">
 					<figure class="icon">
+						<div class="fill"></div>
 						<img src="images/icon_scales.png" alt="filter all scales, fins & other">
 					</figure>
 					<div class="title">
@@ -87,6 +64,7 @@
 				<input type="radio" id="birds" name="animalSelect" value="Bird">
 				<label for="birds">
 					<figure class="icon">
+						<div class="fill"></div>
 						<img src="images/icon_bird.png" alt="filter all birds">
 					</figure>
 					<div class="title">
@@ -109,7 +87,7 @@
 	
 	<footer>
 		<article class="credits">
-			<p>Designed and developed by <a href="http://jfong.design/" target="blank">Johnathan Fong</a>, <a href="http://itscaitlinlucy.com/" target="_blank">Caitlin MacMinn</a> &amp; <a href="http://nonnavolodina.com/" target="_blank">Nonna Volodina</a> | Powered by <a href="https://petfinder.com/" target="_blank">Pet Finder</a> | Icons courtesy of <a href="https://thenounproject.com/" target="_blank">The Noun Project</a> | Patterns courtesy of <a href="http://subtlepatterns.com/" target="_blank">Subtle Patterns</a></p>
+			<p>Designed and developed by <a href="http://jfong.design/" target="blank">Johnathan Fong</a>, <a href="http://itscaitlinlucy.com/" target="_blank">Caitlin MacMinn</a> &amp; <a href="http://nonnavolodina.com/" target="_blank">Nonna Volodina</a> | Powered by <a href="https://petfinder.com/" target="_blank">Pet Finder</a> | Icons courtesy of <a href="https://thenounproject.com/" target="_blank">The Noun Project</a></p>
 		</article>
 	</footer>
 

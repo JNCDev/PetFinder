@@ -8,6 +8,6 @@ function adjustHeights(elem) {
 
 $(document).ready(function(){ 
 	setTimeout(function(){ 
-		adjustHeights('.too_big'); 
+		adjustHeights('.too-big'); 
 	}, 100); 
 });

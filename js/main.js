@@ -12,34 +12,34 @@ var userLocation = {};
 
 petApp.init = function () {
     petApp.getUserLocation();
-    $('#postalSubmit').on('click', function() {
+    $('#postalSubmit').on('click', function () {
         $('.results').empty();
         $('input[name=animalSelect]').attr('checked', false);
     });
-    $(".returnTop").on('click', function(e) {
+    $(".returnTop").on('click', function (e) {
         event.preventDefault(e);
-        $('html, body').animate ({
+        $('html, body').animate({
             //Smooth Scroll from bottom of pet display section to top of pet selection section
-            scrollTop: $("#two").offset().top
+            scrollTop: $("#one").offset().top
         }, 2000);
-    })
+    });
 };
 
-petApp.getUserLocation = function() {
-    $('#userLocationInput').on('submit', function(e) {
+petApp.getUserLocation = function () {
+    $('#userLocationInput').on('submit', function (e) {
         e.preventDefault();
         var userLocation = $('#userPostalCode').val();
         document.getElementById('userLocationInput').reset();
         console.log(userLocation);
         petApp.getLocationData(userLocation);
         //Smooth Scroll from Postal Code input to top of pet selection section
-        $('html, body').animate ({
+        $('html, body').animate({
             scrollTop: $("#two").offset().top
         }, 1000);
     });
 };
 
-petApp.getLocationData = function(data) {
+petApp.getLocationData = function (data) {
     var postalCode = data;
     $.ajax({
         url: 'http://api.petfinder.com/shelter.find',
@@ -50,10 +50,10 @@ petApp.getLocationData = function(data) {
             location: postalCode,
             format: 'json'
         }
-    }). then(function(results) {
+    }).then(function (results) {
         if (results.petfinder.shelters != undefined) {
             var shelterResults = results.petfinder.shelters.shelter;
-            var shelterIDs = shelterResults.map(function(a) {
+            var shelterIDs = shelterResults.map(function (a) {
                 return a.id["$t"];
             });
         } else {
@@ -63,7 +63,7 @@ petApp.getLocationData = function(data) {
     });
 };
 
-petApp.getData = function(shelterIDs) {
+petApp.getData = function (shelterIDs) {
     var shelterCalls = shelterIDs.map(function (id) {
         return $.ajax({
             url: 'http://api.petfinder.com/shelter.getPets',
@@ -83,7 +83,7 @@ petApp.getData = function(shelterIDs) {
             return pets[0].petfinder.pets.pet;
         });
         //Flatten the multiple arrays into one manageable array
-        data = data.reduce(function(prev, next) {
+        data = data.reduce(function (prev, next) {
             return prev.concat(next);
         }, []);
         petApp.pets = data;
@@ -91,15 +91,15 @@ petApp.getData = function(shelterIDs) {
     });
 };
 
-petApp.displayPets = function() {
-    $('input[name=animalSelect]').on('click', function(res) {
+petApp.displayPets = function () {
+    $('input[name=animalSelect]').on('click', function (res) {
         //Smooth Scroll from pet selection section to top of pet display section
-        $('html, body').animate ({
+        $('html, body').animate({
             scrollTop: $("#three").offset().top
         }, 1000);
         $('.results').empty();
         //Filter array of pet data by User's selection
-        var filteredPets = petApp.pets.filter(function(value) {
+        var filteredPets = petApp.pets.filter(function (value) {
             if (value != undefined) {
                 var userInput = $('input[name=animalSelect]:checked').val();
                 return value.animal.$t === userInput;
@@ -109,10 +109,9 @@ petApp.displayPets = function() {
         if (typeof filteredPets[0] === 'undefined') {
             alert('Sorry, it seems your selection of ' + animalCategory + ', hasn\'t returned any results in your area. Please make another selection.');
         }
-        //Use Handlebar template to display pet data
-        var petTemplate = $('#petTemplate').html();
-        var template = Handlebars.compile(petTemplate);
-        filteredPets.forEach(function(pet) {
+
+        // Display pet info on the page
+        filteredPets.forEach(function (pet) {
             var petInfo = {
                 name: pet.name.$t,
                 age: pet.age.$t,
@@ -124,27 +123,54 @@ petApp.displayPets = function() {
                 address: pet.contact.address1.$t,
                 city: pet.contact.city.$t
             };
-            //Push template to the page for each animal
-            var fillTemplate = template(petInfo);
-            $(".results").append(cleanup(fillTemplate));
+
+            // Let's create the "parent" divs first.
+
+            var petContainer = $('<div>').addClass('pet');
+            var petNameContainer = $('<div>').addClass('pet-name');
+            var petInfoContainer = $('<div>').addClass('pet-information');
+            var petDescription = $('<div>').addClass('pet-description');
+            var petList = $('<ul>');
+            var shelterLink = $('<a>').attr("href", petInfo.shelter);
+
+            // Next we'll create the "child" elements.
+
+            var name = $('<h4>').text(cleanup('Meet ' + petInfo.name + '!')).addClass('too-big');
+            var age = $('<li>').text('Age: ' + petInfo.age);
+            var sex = $('<li>').text('Sex: ' + petInfo.sex);
+            var breed = $('<li>').text('Breed: ' + petInfo.breed);
+            var photo = $('<figure style="background-image:url(' + petInfo.photo + ')">').addClass('pet-image');
+
+            // Let's place the child elements with their respective parents.
+
+            petNameContainer.append(name);
+            petList.append(breed, sex, age);
+            shelterLink.addClass('more-info').text('more info');
+            petDescription.append(petList, shelterLink);
+            petInfoContainer.append(petNameContainer, petDescription);
+            petContainer.append(photo, petInfoContainer);
+
+            // Display on the page.
+            $(".results").append(petContainer);
         });
     });
-	var cleanup=function(string) {
-	    return string.replace(/ *\([^)]*\) */g, "");
-	};
+
+    var cleanup = function cleanup(string) {
+        return string.replace(/ *\([^)]*\) */g, "");
+    };
 };
 
 function adjustHeights(elem) {
-	var fontstep = 2;
-	if ($(elem).height()>$(elem).parent().height() || $(elem).width()>$(elem).parent().width()) {
-	$(elem).css('font-size',(($(elem).css('font-size').substr(0,2)-fontstep)) + 'px').css('line-height',(($(elem).css('font-size').substr(0,2))) + 'px');
-	adjustHeights(elem);
-	}
+    var fontstep = 2;
+    if ($(elem).height() > $(elem).parent().height() || $(elem).width() > $(elem).parent().width()) {
+        $(elem).css('font-size', $(elem).css('font-size').substr(0, 2) - fontstep + 'px').css('line-height', $(elem).css('font-size').substr(0, 2) + 'px');
+        adjustHeights(elem);
+    }
 }
 
-$(function() {
+$(function () {
     petApp.init();
-    setTimeout(function() { 
-        adjustHeights('.too_big'); 
-    }, 100); 
+    setTimeout(function () {
+        adjustHeights('.too-big');
+    }, 100);
 });
